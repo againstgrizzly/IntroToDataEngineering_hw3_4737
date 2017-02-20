@@ -1,0 +1,21 @@
+02-19 11:58:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE MOVIE(ID VARCHAR(100),TITLE VARCHAR(100),YEAR SMALLINT UNSIGNED,MPPA_RATING VARCHAR(10),AUDIENCE_SCORE SMALLINT UNSIGNED,CRITICS_SCORE SMALLINT UNSIGNEDCONSTRAINT[*] PK_MOVIE_ID PRIMARY KEY(ID) "; expected "(, FOR, UNSIGNED, NOT, NULL, AS, DEFAULT, GENERATED, NOT, NULL, AUTO_INCREMENT, BIGSERIAL, SERIAL, IDENTITY, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table movie(id varchar(100),title varchar(100),year smallint unsigned,mppa_rating varchar(10),audience_score smallint unsigned,critics_score smallint unsignedconstraint pk_movie_id primary key(id) [42001-176]
+02-19 12:00:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE MOVIE(ID VARCHAR(100),TITLE VARCHAR(100),YEAR SMALLINT UNSIGNED,MPPA_RATING VARCHAR(10),AUDIENCE_SCORE SMALLINT UNSIGNED,CRITICS_SCORE SMALLINT UNSIGNED CONSTRAINT PK_MOVIE_ID PRIMARY KEY([*]ID) "; expected "HASH, AUTO_INCREMENT, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table movie(id varchar(100),title varchar(100),year smallint unsigned,mppa_rating varchar(10),audience_score smallint unsigned,critics_score smallint unsigned constraint pk_movie_id primary key(id) [42001-176]
+02-19 12:13:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE MOVIE(ID VARCHAR(100),TITLE VARCHAR(100),YEAR SMALLINT UNSIGNED,MPPA_RATING VARCHAR(10),AUDIENCE_SCORE SMALLINT UNSIGNED,CRITICS_SCORE SMALLINT UNSIGNED CONSTRAINT PK_MOVIE_ID PRIMARY KEY([*]ID) "; expected "HASH, AUTO_INCREMENT, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table movie(id varchar(100),title varchar(100),year smallint unsigned,mppa_rating varchar(10),audience_score smallint unsigned,critics_score smallint unsigned constraint pk_movie_id primary key(id) [42001-176]
+02-19 12:13:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACTOR(ID VARCHAR(100),NAME VARCHAR(100),CONSTRAINT PK_ACTOR_ID PRIMARY KEY(ID) "; expected "INDEX, ,, )"; SQL statement:
+create table actor(id varchar(100),name varchar(100),constraint pk_actor_id primary key(id) [42001-176]
+02-19 21:20:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MOVIE" already exists; SQL statement:
+create table movie( id varchar(100),title varchar(100),year smallint unsigned,mpaa_rating varchar(10),audience_score smallint unsigned,critics_score smallint unsigned,constraint pk_id primary key(id)); [42101-176]
+02-19 21:21:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DROP MOVIE[*] "; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE"; SQL statement:
+drop movie [42001-176]
+02-19 21:21:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ACTOR" already exists; SQL statement:
+create table actor (id varchar(100),name varchar(100),constraint pk_actor_id primary key (id)); [42101-176]
