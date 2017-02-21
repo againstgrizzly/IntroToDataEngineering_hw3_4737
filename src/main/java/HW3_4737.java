@@ -70,8 +70,7 @@ public class HW3_4737 {
             MovieObject movieObject = m.readValue(new File("src/main/resources/movies/page" + count + ".json"), MovieObject.class);
             movieObjects[i] = movieObject;
         }
-
-
+        
         for (int loopThroughMovieObjects = 0; loopThroughMovieObjects < movieObjects.length; loopThroughMovieObjects++) {
 
             Movie movies[] = movieObjects[loopThroughMovieObjects].getMovies();
