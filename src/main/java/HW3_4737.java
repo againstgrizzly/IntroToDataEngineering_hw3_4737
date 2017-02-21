@@ -4,9 +4,6 @@ import org.h2.store.fs.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,7 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class HW3_4737 {
 
@@ -66,20 +62,49 @@ public class HW3_4737 {
         ObjectMapper m = new ObjectMapper();
         m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        List<MovieObject> movieObjects = new ArrayList<MovieObject>();
+        MovieObject movieObjects[] = new MovieObject[25];
 
-        for(int i = 0; i < 25; i++ ){
-
+        //Create add movie objects to a list of movieobjects
+        for (int i = 0; i < 25; i++) {
             int count = i + 1;
-
-            MovieObject movieObject = m.readValue(new File ("src/main/resources/movies/page" + count + ".json"), MovieObject.class);
-            movieObjects.add(movieObject);
-
+            MovieObject movieObject = m.readValue(new File("src/main/resources/movies/page" + count + ".json"), MovieObject.class);
+            movieObjects[i] = movieObject;
         }
 
+
+        for (int loopThroughMovieObjects = 0; loopThroughMovieObjects < movieObjects.length; loopThroughMovieObjects++) {
+
+            Movie movies[] = movieObjects[loopThroughMovieObjects].getMovies();
+
+            for (int i = 0; i < movies.length; i++) {
+
+                int id = movies[i].getId();
+                String title = movies[i].getTitle();
+                int year = movies[i].getYear();
+                String mpaa_rating = movies[i].getMpaa_rating();
+                int audience_score = movies[i].getRatings().getAudience_score();
+                int critics_score = movies[i].getRatings().getCritics_score();
+
+                title = title.replace("'", "''");
+
+                statement.executeUpdate(
+                        "insert into movie(id,title, year, mpaa_rating, "
+                                + "audience_score,critics_score) values('"
+                                + id + "','" + title + "','"
+                                + year + "','"
+                                + mpaa_rating + "','"
+                                + audience_score + "','"
+                                + critics_score + "');");
+            }
+
+
+        }
 
         connection.close();
 
     }
 
+
 }
+
+

@@ -3,7 +3,7 @@
  */
 public class MovieObject {
 
-    private Movies movies[];
+    private Movie movies[];
     private Links links;
     private String link_template;
     private int total;
@@ -16,11 +16,11 @@ public class MovieObject {
         this.total = total;
     }
 
-    public Movies[] getMovies() {
+    public Movie[] getMovies() {
         return movies;
     }
 
-    public void setMovies(Movies[] movies) {
+    public void setMovies(Movie[] movies) {
         this.movies = movies;
     }
 

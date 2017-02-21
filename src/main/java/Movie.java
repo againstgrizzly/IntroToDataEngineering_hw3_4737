@@ -1,7 +1,7 @@
 /**
  * Created by Brannon on 2/19/2017.
  */
-public class Movies {
+public class Movie {
 
     private int id;
     private String title;
