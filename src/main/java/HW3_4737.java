@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class HW3_4737 {
 
@@ -70,7 +68,8 @@ public class HW3_4737 {
             MovieObject movieObject = m.readValue(new File("src/main/resources/movies/page" + count + ".json"), MovieObject.class);
             movieObjects[i] = movieObject;
         }
-        
+
+        //This is the loop for movie table
         for (int loopThroughMovieObjects = 0; loopThroughMovieObjects < movieObjects.length; loopThroughMovieObjects++) {
 
             Movie movies[] = movieObjects[loopThroughMovieObjects].getMovies();
@@ -96,14 +95,62 @@ public class HW3_4737 {
                                 + critics_score + "');");
             }
 
+        }
+
+        //this is the loop for the actor table
+        Map<Integer, String> myHashMap = new HashMap<>();
+        for (int i = 0; i < movieObjects.length; i++) {
+            for (int j = 0; j < movieObjects[i].getMovies().length; j++) {
+                for (int k = 0; k < movieObjects[i].getMovies()[j].getAbridged_cast().length; k++) {
+                    int myId = movieObjects[i].getMovies()[j].getAbridged_cast()[k].getId();
+                    String myName = movieObjects[i].getMovies()[j].getAbridged_cast()[k].getName();
+                    myName = myName.replace("'", "''");
+                    myHashMap.put(myId, myName);
+                }
+            }
 
         }
 
-        connection.close();
+        for (int key : myHashMap.keySet()) {
+            statement.executeUpdate(
+                    "insert into actor(id, name"
+                            + ") values('"
+                            + key + "','" + myHashMap.get(key)
+                            + "');");
+        }
 
+        //this is for the character table
+        for (int i = 0; i < movieObjects.length; i++) {
+            Movie movies[] = movieObjects[i].getMovies();
+            for (int j = 0; j < movies.length; j++) {
+                Abridged_Cast abridged_cast[] = movies[j].getAbridged_cast();
+                for (int k = 0; k < abridged_cast.length; k++) {
+                    String character[] = abridged_cast[k].getCharacters();
+
+                    try {
+                        for (int z = 0; z < character.length; z++) {
+                            String name = character[z];
+                            name = name.replace("'", "''");
+                            statement.executeUpdate(
+                                    "insert into character(actor_id, movie_id,"
+                                            + "character) " + "values('"
+                                            + abridged_cast[j].getId() + "','"
+                                            + movies[i].getId() + "','" + name
+                                            + "');");
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
+
+        connection.close();
     }
 
 
 }
+
 
 
